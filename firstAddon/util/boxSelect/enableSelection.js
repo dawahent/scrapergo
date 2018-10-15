@@ -26,16 +26,17 @@ var clickCtr = {
 };
 
 //return a dom element div with such color and opacity of -3
+//it should be just on top of the dom
 //it is also transparent to mouse pointer!!!
-function makeMask(colorToBe){
+function makeMask(dom, colorToBe){
     var toRet = document.createElement("DIV");
     toRet.style.background = colorToBe;
     toRet.style.zIndex = 85;
     toRet.style.position = "absolute";
-    toRet.style.top = "0px";
-    toRet.style.left = "0px";
-    toRet.style.width = "100%";
-    toRet.style.height = "100%";
+    toRet.style.top = dom.offsetTop + "px";
+    toRet.style.left = dom.offsetLeft + "px";
+    toRet.style.width = dom.offsetWidth + "px";
+    toRet.style.height = dom.offsetHeight + "px";
     toRet.style.opacity = 0.3;
     //important!!! mask should ignore mouse!!
     toRet.style.pointerEvents = "none";
@@ -74,7 +75,7 @@ function putOnMask(childDom, colorToBe){
     if(prt === null){
         return;
     }
-    let newMask = makeMask(colorToBe);
+    let newMask = makeMask(childDom, colorToBe);
     prt.insertBefore(newMask, childDom);
 }
 
@@ -135,3 +136,5 @@ let clickBorder = function(e){
 document.addEventListener("mouseover", dispMask);
 document.addEventListener("click", clickBorder);
 document.addEventListener("mouseout", hideMask);
+var aaa = "1243";
+aaa

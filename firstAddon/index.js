@@ -19,8 +19,13 @@ chrome.storage.sync.get('selected', function(data) {
 
 //define what to do when clicking the buttons
 goButton.onclick = function(){
-
-	execFile('util/boxSelect/enableSelection.js');
+	chrome.tabs.executeScript(
+		null,
+		{ file: 'util/boxSelect/enableSelection.js' },
+		(results) => {
+			goButton.style.pointerEvents = "none";
+		}
+	);
 };
 
 //update selected in storage when opt defined

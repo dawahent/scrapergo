@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name"            : "Scrapper Go",
-    "description"     : "Structured Data Extraction Framework",
-    "short_name"      : "VIPS",
+    "description"     : "well organized data fetcher",
+    "short_name"      : "SC",
     "version"         : "0.1",
    
     "browser_action": {
@@ -23,8 +23,6 @@
     },
 
     "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'"
-  
-    //Please add any library here if need to use in plug-in
   
   }
   
