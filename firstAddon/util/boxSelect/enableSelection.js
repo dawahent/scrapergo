@@ -15,10 +15,12 @@ var clickCtr = {
 		if (currT > this.lastT + 12) {
 			if(isSelect){
                 //selecting
+                removeMask(clickedElement);// remove the red mask first
                 putOnMask(clickedElement,"blue");
             }else{
                 //de-selecting
                 removeMask(clickedElement);
+                putOnMask(clickedElement,"red"); // put on red mask
             }
 			this.lastT = currT;
 		}
@@ -42,6 +44,8 @@ function makeMask(dom, colorToBe){
     toRet.style.pointerEvents = "none";
     //easier to check whether this element is a mask
     toRet.maskMark = "maskMark";
+    //document.querySelectorAll("div[maskMark") needs below to work
+    toRet.setAttribute("maskMark",colorToBe);
     return toRet;
 }
 
@@ -120,7 +124,7 @@ let hideMask = function (){
 };
 
 //when clicking, update the click controller
-let clickBorder = function(e){
+let clickMask = function(e){
     var targetElement = e.target || e.srcElement;
     e.preventDefault();
     if (hasMask(targetElement, "red")) {
@@ -134,5 +138,5 @@ let clickBorder = function(e){
 
 
 document.addEventListener("mouseover", dispMask);
-document.addEventListener("click", clickBorder);
+document.addEventListener("click", clickMask);
 document.addEventListener("mouseout", hideMask);
