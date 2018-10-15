@@ -136,5 +136,3 @@ let clickBorder = function(e){
 document.addEventListener("mouseover", dispMask);
 document.addEventListener("click", clickBorder);
 document.addEventListener("mouseout", hideMask);
-var aaa = "1243";
-aaa

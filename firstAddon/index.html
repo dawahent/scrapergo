@@ -1,15 +1,41 @@
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+body {
+  min-width: 500px;
+  position: relative;
+  vertical-align:middle;
+}
+.tableDiv {
+    margin: auto;
+    width: 60%;
+}
+</style>
 <body>
-    Hello World
-    <select class="cat_dropdown" name="drop_down_selection" id="selectOpt">
-        <option value="0">-- Please select --</option>
-        <option value="1">DOM Selection</option>
-        <option value="2">VIPS Selection</option>
-    </select>
-    <button id="goButton">
-        Go
-    </button>
+    <div style="margin-bottom: 10px;">
+        <h3>Scrapper Go</h3>
+        <button id="goButton">
+            Enable Selection
+        </button>
+        <button id="guessOnSelectButton">
+            Guess on Selection
+        </button>
+        <button id="guessOnTableButton">
+            Guess on Table
+        </button>
+        <button id="newTaskButton">
+            New Task
+        </button>
+    </div>
+    <div class="tableDiv">
+        <table id='tableTag'></table>
+        <select id="selectOpt">
+            <option value="0">-- Add Attribute --</option>
+            <option value="1">Width</option>
+            <option value="2">Height</option>
+        </select>
+    </div>
     <script src="index.js"></script>
+    <script src="app/tableCtrl.js"></script>
 </body>
 </html>

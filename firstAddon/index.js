@@ -1,21 +1,11 @@
 'use strict';
-//executing js file in specified file directory 'fileDir'
-function execFile(fileDir){
-    //following cmd will be exec in the scope of web page currently looked at
-    //NOT in scope of Scraper Go extenstion!
-    chrome.tabs.executeScript({
-        file: fileDir
-    });
-}
 
-//get the buttons
+//get the essential tags
 let goButton = document.getElementById("goButton");
+let guessOnSelectButton = document.getElementById("guessOnSelectButton");
+let newTaskButton = document.getElementById("newTaskButton");
 let selectionOpt = document.getElementById("selectOpt");
-
-//init selectionOpt by restoring it
-chrome.storage.sync.get('selected', function(data) {
-	selectOpt.value=data.selected;
-});
+let tableTag = document.getElementById("tableTag");
 
 //define what to do when clicking the buttons
 goButton.onclick = function(){
@@ -28,9 +18,15 @@ goButton.onclick = function(){
 	);
 };
 
-//update selected in storage when opt defined
-selectOpt.onchange = function(){
-	chrome.storage.sync.set({selected: selectOpt.value}, function() {
-  		//do nothing
- 	});
+newTaskButton.onclick = function(){
+	chrome.storage.sync.set({tableSet: {}}, function() {
+
+	});
+	chrome.storage.sync.set({selectSet: {}}, function() {
+
+	});
+	//clean the table
+	while(tableTag.firstChild){
+		tableTag.removeChild(tableTag.firstChild);
+	}
 };
