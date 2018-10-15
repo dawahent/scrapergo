@@ -8,12 +8,18 @@ let mouseoverColor = "2px solid rgb(255, 0, 0)"; //color when mouse over it
 //click controller which keeps record of the last clicking time lastT
 var clickCtr = {
 	lastT : 0 ,
-	update : function(clickedElement,colorToBe){
+	update : function(clickedElement, isSelect){
         //current Time
         let currT = Math.floor(Number(new Date()));
 		//if two clicks are more than 12 ms away, they are 2 distinct clicks
 		if (currT > this.lastT + 12) {
-			clickedElement.style.border = colorToBe;
+			if(isSelect){
+                //selecting
+                putOnMask(clickedElement,"blue");
+            }else{
+                //de-selecting
+                removeMask(clickedElement);
+            }
 			this.lastT = currT;
 		}
 	}
@@ -72,6 +78,14 @@ function putOnMask(childDom, colorToBe){
     prt.insertBefore(newMask, childDom);
 }
 
+//remove the mask on the dom
+//important: we assume dom is checked to be masked!
+function removeMask(dom){
+    let prt = dom.parentElement;
+    let domIdx = Array.from(prt.childNodes).indexOf(dom);
+    prt.removeChild(prt.childNodes[domIdx - 1]);
+}
+
 //two types of transparent maskes are used: red and blue
 
 
@@ -91,28 +105,29 @@ let dispMask = function(){
     //no mask? put on the mask!
     putOnMask(event.target, "red");
 
-	// if(event.target.style.border === ""){
- //        event.target.style.border = mouseoverColor;
- //    }
 };
 
 //when mouse out it, remove mask
 let hideMask = function (){    
     event.preventDefault();
-    
-    // if(event.target.style.border === mouseoverColor){
-    //     event.target.style.border = "";
-    // }
+    //it should be assumed be that the event target has mask
+    //red -> kill it
+    if(hasMask(event.target, "red")) {
+        removeMask(event.target);
+    }
+    //selected (blue) -> do nothing
 };
 
 //when clicking, update the click controller
 let clickBorder = function(e){
     var targetElement = e.target || e.srcElement;
     e.preventDefault();
-    if (targetElement.style.border !== attriColor) {
-        clickCtr.update(targetElement,attriColor);
+    if (hasMask(targetElement, "red")) {
+        //selecting
+        clickCtr.update(targetElement, true);
     } else {
-        clickCtr.update(targetElement,"");
+        //de-selecting
+        clickCtr.update(targetElement, false);
     }
 };
 
