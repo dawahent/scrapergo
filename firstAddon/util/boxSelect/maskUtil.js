@@ -63,4 +63,3 @@ function removeMask(dom){
 }
 
 //two types of transparent maskes are used: red and blue
-// export { makeMask, hasMask, isMask, putOnMask, removeMask };

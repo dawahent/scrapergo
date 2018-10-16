@@ -1,11 +1,12 @@
 'use strict';
 
 //get the essential tags
-let goButton = document.getElementById("goButton");
-let guessOnSelectButton = document.getElementById("guessOnSelectButton");
-let newTaskButton = document.getElementById("newTaskButton");
-let selectionOpt = document.getElementById("selectOpt");
-let tableTag = document.getElementById("tableTag");
+
+var goButton = document.getElementById("goButton");
+var guessOnSelectButton = document.getElementById("guessOnSelectButton");
+var newTaskButton = document.getElementById("newTaskButton");
+var selectionOpt = document.getElementById("selectOpt");
+var tableTag = document.getElementById("tableTag");
 
 //define what to do when clicking the buttons
 goButton.onclick = function(){
