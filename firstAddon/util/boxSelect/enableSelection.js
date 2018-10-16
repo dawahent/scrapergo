@@ -16,7 +16,7 @@ var clickCtr = {
 			if(isSelect){
                 //selecting
                 removeMask(clickedElement);// remove the red mask first
-                putOnMask(clickedElement,"blue");
+                putOnMask(clickedElement,"blue", true);
             }else{
                 //de-selecting
                 removeMask(clickedElement);
@@ -48,7 +48,7 @@ let dispMask = function(){
 };
 
 //when mouse out it, remove mask
-let hideMask = function (){    
+let hideMask = function (){
     event.preventDefault();
     //it should be assumed be that the event target has mask
     //red -> kill it

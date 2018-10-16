@@ -1,7 +1,10 @@
 //return a dom element div with such color and opacity of -3
 //it should be just on top of the dom
 //it is also transparent to mouse pointer!!!
-function makeMask(dom, colorToBe){
+//seByUser indicates whether user specifically cliked on such dom to mask it
+//colorToBe = 'red', seByUser cannot be true
+
+function makeMask(dom, colorToBe, seByUser=false){
     var toRet = document.createElement("DIV");
     toRet.style.background = colorToBe;
     toRet.style.zIndex = 85;
@@ -17,6 +20,11 @@ function makeMask(dom, colorToBe){
     toRet.maskMark = "maskMark";
     //document.querySelectorAll("div[maskMark") needs below to work
     toRet.setAttribute("maskMark",colorToBe);
+    //set 'seByUser' to the mask if user clicked at it
+    if(seByUser){
+      toRet.setAttribute("seByUser","undef");
+    }
+
     return toRet;
 }
 
@@ -45,12 +53,12 @@ function isMask(dom, colorToMatch){
 }
 
 //create mask silbling with indicated color of such dom
-function putOnMask(childDom, colorToBe){
+function putOnMask(childDom, colorToBe, seByUser=false){
     let prt = childDom.parentElement;
     if(prt === null){
         return;
     }
-    let newMask = makeMask(childDom, colorToBe);
+    let newMask = makeMask(childDom, colorToBe, seByUser);
     prt.insertBefore(newMask, childDom);
 }
 
