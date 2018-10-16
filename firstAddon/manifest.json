@@ -22,6 +22,13 @@
         "persistent": false
     },
 
+     "content_scripts": [
+       {
+         "matches": ["http://*/*","https://*/*"],
+         "js": ["./util/boxSelect/maskUtil.js"]
+       }
+     ],
+
     "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'"
   
   }
