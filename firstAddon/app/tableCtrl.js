@@ -24,26 +24,21 @@ function addRow(paramArr){
 //append tr tags but no store or set is performed on syn for tableSet
 //only perform when the top buttons are perfromed
 selectionOpt.onchange=function(){
-	chrome.storage.sync.get(['selectSet'], function(data){
-		//if no dom is selected and guess on, this tag shall not be touched
-		if (Object.keys(data.selectSet).length == 0){
-			return;
-		}
-		switch(selectionOpt.value){
+	
+	switch(selectionOpt.value){
 
-			case 1: //width
-				addRow(['width', data.selectSet[0].width + ""]);
-			break;
+	case "1": //width
+		addRow(['width']);
+	break;
 
-			case 2: //height
-				addRow(['height', data.selectSet[0].height + ""]);
-			break;
+	case "2": //height
+		addRow(['height']);
+	break;
 
 
-			default:
-				console.log(selectionOpt.value);
-		}
-	});
+	default:
+		console.log(selectionOpt.value);
+	}
 
 	
 	selectionOpt.value = 0;
