@@ -1,18 +1,8 @@
 'use strict';
-//in this version, I am only going to look at the width of 
+//in this version, I am only going to look at the width of
 //the first masked node to guess desired nodes
 
 
-//apply func to node and all child nodes of it in any depth
-function walkDOM (node,func) {
-    func(node);
-    node = node.firstChild;
-    while(node) {
-        walkDOM(node,func);
-        node = node.nextSibling;
-    }
-
-};
 
 
 //find the mask first!

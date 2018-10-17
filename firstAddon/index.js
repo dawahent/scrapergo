@@ -19,16 +19,16 @@ goButton.onclick = function(){
 	);
 };
 
-guessOnSelectButton.onclick = function(){
-	chrome.tabs.executeScript(
-		null,
-		{ file: 'app/predictor/predictOnMask/simpleGuessOnWidth.js' },
-		(results) => {
-			console.log(results[0]);
-			guessOnSelectButton.style.pointerEvents = "none";
-		}
-	);
-}
+// guessOnSelectButton.onclick = function(){
+// 	chrome.tabs.executeScript(
+// 		null,
+// 		{ file: 'app/predictor/predictOnMask/simpleGuessOnWidth.js' },
+// 		() => {
+// 			// console.log(results[0]);
+// 			// guessOnSelectButton.style.pointerEvents = "none";
+// 		}
+// 	);
+// }
 
 newTaskButton.onclick = function(){
 	chrome.storage.sync.set({tableSet: {}}, function() {
@@ -42,3 +42,9 @@ newTaskButton.onclick = function(){
 		tableTag.removeChild(tableTag.firstChild);
 	}
 };
+
+//init blueMask selection on page
+chrome.tabs.executeScript(
+	null,
+	{ file: 'app/tableCtrl/initMaskOnTable.js' }
+);

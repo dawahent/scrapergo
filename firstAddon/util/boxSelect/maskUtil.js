@@ -30,7 +30,8 @@ function makeMask(dom, colorToBe, seByUser=false){
 
 //boolean function indicating whether an dom's former neighbor (if it has)
 //is a mask with such color
-function hasMask(childDom, colorToMatch){
+//last bool indicates whether seByUser should be examined
+function hasMask(childDom, colorToMatch, seByUser = false){
     let prt = childDom.parentElement;
     if(prt === null){
         return false;
@@ -41,14 +42,18 @@ function hasMask(childDom, colorToMatch){
         //he is the eldest child!
         return false;
     }
-    return isMask(prt.childNodes[childDomIdx - 1], colorToMatch);
+
+    return isMask(prt.childNodes[childDomIdx - 1], colorToMatch, seByUser);
 }
 
 //check whether an dom element is a mask with certain color
-function isMask(dom, colorToMatch){
+//last bool indicates whether seByUser should be examined
+function isMask(dom, colorToMatch, seByUser){
     //is it a mask?
     if(!dom.maskMark) return false;
     //if so, is it such color?
+    if(seByUser)
+      return !!dom["seByUser"];
     return dom.style.background === colorToMatch;
 }
 
@@ -71,3 +76,17 @@ function removeMask(dom){
 }
 
 //two types of transparent maskes are used: red and blue
+
+//later to be sep to another file:
+//apply func to node and all child nodes of it in any depth
+//ignore mask!
+function walkDOM (node,func) {
+    func(node);
+    node = node.firstChild;
+    while(node) {
+        if(!isMask(node, 'blue')) {
+          walkDOM(node,func);
+          node = node.nextSibling;
+        }
+    }
+}
