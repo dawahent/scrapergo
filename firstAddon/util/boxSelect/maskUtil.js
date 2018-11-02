@@ -4,6 +4,7 @@
 //seByUser indicates whether user specifically cliked on such dom to mask it
 //colorToBe = 'red', seByUser cannot be true
 
+
 function makeMask(dom, colorToBe, seByUser=false){
     var toRet = document.createElement("DIV");
     toRet.style.background = colorToBe;
@@ -14,6 +15,7 @@ function makeMask(dom, colorToBe, seByUser=false){
     toRet.style.width = dom.offsetWidth + "px";
     toRet.style.height = dom.offsetHeight + "px";
     toRet.style.opacity = 0.3;
+    toRet.style.overflow = "hidden";
     //important!!! mask should ignore mouse!!
     toRet.style.pointerEvents = "none";
     //easier to check whether this element is a mask
